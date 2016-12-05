@@ -2,6 +2,7 @@
 var express = require('express');        // call express
 var app = express();                     // define our app using express
 var bodyParser = require('body-parser');
+var compression = require('compression');
 var mongoose = require('mongoose');
 
 var games = require('./app/routes/game.routes.js');
@@ -11,10 +12,11 @@ mongoose.Promise = global.Promise
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(compression());
+app.use(bodyParser.json({ limit: '20mb' }));
+app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 
-var port = process.env.PORT || 3000;        // set our port
+var port = process.env.PORT || 8080;        // set our port
 
 app.use('/api', games);
 
