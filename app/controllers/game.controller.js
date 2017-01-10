@@ -1,18 +1,18 @@
 var Game = require('../models/game');
+var sanitizeHtml = require('sanitize-html');
 
 exports.addGame = function(req, res) {
-  var game = new Game();
+  var newGame = new Game(req.body.game);
 
-  game.name = req.body.name;
-  game.description = req.body.description;
-  game.img = req.body.img;
+  newGame.name = sanitizeHtml(newGame.name);
+  newGame.description = sanitizeHtml(newGame.description);
+  newGame.img = sanitizeHtml(newGame.img);
 
-  game.save(function(err) {
+  newGame.save((err, saved) => {
     if (err) {
-      res.send(err);
+      res.status(500).send(err);
     }
-
-    res.json({ message: 'Game created!' });
+    res.json({ game: saved });
   });
 }
 
@@ -43,11 +43,9 @@ exports.editGame = function(req, res) {
       res.send(err);
     }
 
-    game.name = req.body.name;
-    game.description = req.body.description;
-    game.img = req.body.img;
+    game = req.body.game;
 
-    Game.save(function(err) {
+    game.save(function(err) {
       if (err) {
         res.send(err);
       }
