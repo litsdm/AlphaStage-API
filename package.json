@@ -5,7 +5,9 @@
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
     "express": "^4.14.0",
+    "gridfs-stream": "^1.1.1",
     "mongoose": "^4.7.1",
+    "multer": "^1.2.1",
     "sanitize-html": "^1.13.0"
   }
 }

@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 
 var games = require('./app/routes/game.routes.js');
 
-mongoose.connect('mongodb://cdiezm:telefono1@ds159737.mlab.com:59737/playgrounds')
+mongoose.connect('mongodb://cdiezm:telefono1@ds159737.mlab.com:59737/playgrounds');
 mongoose.Promise = global.Promise
 
 // configure app to use bodyParser()

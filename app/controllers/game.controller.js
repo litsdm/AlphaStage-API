@@ -7,6 +7,7 @@ exports.addGame = function(req, res) {
   newGame.name = sanitizeHtml(newGame.name);
   newGame.description = sanitizeHtml(newGame.description);
   newGame.img = sanitizeHtml(newGame.img);
+  newGame.backgroundImg = sanitizeHtml(newGame.backgroundImg);
 
   newGame.save((err, saved) => {
     if (err) {
@@ -43,7 +44,7 @@ exports.editGame = function(req, res) {
       res.send(err);
     }
 
-    game = req.body.game;
+    var game = new Game(req.body.game);
 
     game.save(function(err) {
       if (err) {
