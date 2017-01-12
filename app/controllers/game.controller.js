@@ -44,7 +44,15 @@ exports.editGame = function(req, res) {
       res.send(err);
     }
 
-    var game = new Game(req.body.game);
+    var newGame = new Game(req.body.game);
+
+    game.name = sanitizeHtml(newGame.name);
+    game.description = sanitizeHtml(newGame.description);
+    game.img = sanitizeHtml(newGame.img);
+    game.backgroundImg = sanitizeHtml(newGame.backgroundImg);
+
+    game.galleryLinks = newGame.galleryLinks
+    game.videoLinks = newGame.videoLinks
 
     game.save(function(err) {
       if (err) {
