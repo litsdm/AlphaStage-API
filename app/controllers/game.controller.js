@@ -46,10 +46,23 @@ exports.editGame = function(req, res) {
 
     var newGame = new Game(req.body.game);
 
-    game.name = sanitizeHtml(newGame.name);
-    game.description = sanitizeHtml(newGame.description);
-    game.img = sanitizeHtml(newGame.img);
-    game.backgroundImg = sanitizeHtml(newGame.backgroundImg);
+    var name = sanitizeHtml(newGame.name);
+    var description = sanitizeHtml(newGame.description);
+    var img = sanitizeHtml(newGame.img);
+    var backgroundImg = sanitizeHtml(newGame.backgroundImg);
+
+    if (name && name != "undefined") {
+      game.name = name
+    }
+    if (description && description != "undefined") {
+      game.description = description
+    }
+    if (img && img != "undefined") {
+      game.img = img;
+    }
+    if (backgroundImg && backgroundImg != "undefined") {
+      game.backgroundImg = backgroundImg
+    }
 
     game.galleryLinks = newGame.galleryLinks
     game.videoLinks = newGame.videoLinks
