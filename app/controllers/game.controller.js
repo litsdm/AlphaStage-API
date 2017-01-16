@@ -63,9 +63,21 @@ exports.editGame = function(req, res) {
     if (backgroundImg && backgroundImg != "undefined") {
       game.backgroundImg = backgroundImg
     }
-
-    game.galleryLinks = newGame.galleryLinks
-    game.videoLinks = newGame.videoLinks
+    if (newGame.galleryLinks && newGame.galleryLinks[0] != null) {
+      game.galleryLinks = newGame.galleryLinks
+    }
+    if (newGame.videoLinks && newGame.videoLinks[0] != null) {
+      game.videoLinks = newGame.videoLinks
+    }
+    if (newGame.availableOn.windows) {
+      game.availableOn.windows = newGame.availableOn.windows
+    }
+    if (newGame.availableOn.macOS) {
+      game.availableOn.macOS = newGame.availableOn.macOS
+    }
+    if (newGame.availableOn.linux) {
+      game.availableOn.linux = newGame.availableOn.linux
+    }
 
     game.save(function(err) {
       if (err) {
