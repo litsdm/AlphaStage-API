@@ -9,25 +9,30 @@ var multer = require('multer');
 var multerS3 = require('multer-s3');
 
 var games = require('./app/routes/game.routes.js');
+var gameplays = require('./app/routes/gameplay.routes.js');
 
 mongoose.connect('mongodb://cdiezm:telefono1@ds159737.mlab.com:59737/playgrounds');
 mongoose.Promise = global.Promise
 
-var s3 = new aws.S3();
 
 aws.config.update({
-    secretAccessKey: 'pXVML+otjzY7OOUhCXSbsOwJQIcufmMDDtJPphtt',
-    accessKeyId: 'AKIAIPZ4W7T44ISFAHTA',
+    secretAccessKey: 'what you looking at',
+    accessKeyId: 'secret',
     region: 'us-west-1'
 });
+
+var s3 = new aws.S3();
 
 var upload = multer({
     storage: multerS3({
         s3: s3,
         bucket: 'playgrounds-bucket',
+        metadata: function (req, file, cb) {
+          cb(null, {fieldName: file.fieldname});
+        },
         key: function (req, file, cb) {
             console.log(file);
-            //cb(null, file.originalname); //use Date.now() for unique file keys
+            cb(null, file.originalname); //use Date.now() for unique file keys
         }
     })
 });
@@ -40,11 +45,12 @@ app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 
 var port = process.env.PORT || 8080;        // set our port
 
-app.post('/upload', upload.array('upl',1), function (req, res, next) {
+app.post('/upload', upload.single('upl'), function (req, res, next) {
     res.send("Uploaded!");
 });
 
 app.use('/api', games);
+app.use('/api', gameplays);
 
 app.listen(port);
 console.log('Magic happens on port ' + port);
