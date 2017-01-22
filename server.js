@@ -16,7 +16,7 @@ mongoose.Promise = global.Promise
 
 
 aws.config.update({
-    secretAccessKey: 'what you looking at',
+    secretAccessKey: 'Secreto m8',
     accessKeyId: 'secret',
     region: 'us-west-1'
 });
@@ -47,6 +47,18 @@ var port = process.env.PORT || 8080;        // set our port
 
 app.post('/upload', upload.single('upl'), function (req, res, next) {
     res.send("Uploaded!");
+});
+
+app.get('/download', function(req, res) {
+  var config = {
+    client: s3,
+    concurrency: 6,
+    params: {
+      Key: req.body.key,
+      Bucket: 'playgrounds-bucket'
+    }
+  }
+  downloader(config).pipe(fs.createWriteStream("/tmp/" + req.body.key));
 });
 
 app.use('/api', games);
