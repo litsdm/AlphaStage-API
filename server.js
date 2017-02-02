@@ -7,6 +7,8 @@ var mongoose = require('mongoose');
 var aws = require('aws-sdk');
 var multer = require('multer');
 var multerS3 = require('multer-s3');
+var downloader = require('s3-download-stream');
+var fs = require('fs');
 
 var games = require('./app/routes/game.routes.js');
 var gameplays = require('./app/routes/gameplay.routes.js');
@@ -16,8 +18,8 @@ mongoose.Promise = global.Promise
 
 
 aws.config.update({
-    secretAccessKey: 'Secreto m8',
-    accessKeyId: 'secret',
+    secretAccessKey: '',
+    accessKeyId: '',
     region: 'us-west-1'
 });
 
@@ -50,15 +52,22 @@ app.post('/upload', upload.single('upl'), function (req, res, next) {
 });
 
 app.get('/download', function(req, res) {
+  console.log("download accessed");
   var config = {
     client: s3,
     concurrency: 6,
     params: {
-      Key: req.body.key,
+      Key: "Titan Souls1484806968662.webm",
       Bucket: 'playgrounds-bucket'
     }
   }
-  downloader(config).pipe(fs.createWriteStream("/tmp/" + req.body.key));
+  var options = {
+      Bucket    : '/playgrounds-bucket',
+      Key    : "Titan Souls1484806968662.webm",
+  };
+
+  var fileStream = s3.getObject(options).createReadStream();
+  fileStream.pipe(res);
 });
 
 app.use('/api', games);
