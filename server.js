@@ -13,13 +13,13 @@ var fs = require('fs');
 var games = require('./app/routes/game.routes.js');
 var gameplays = require('./app/routes/gameplay.routes.js');
 
-mongoose.connect('mongodb://cdiezm:telefono1@ds159737.mlab.com:59737/playgrounds');
+mongoose.connect(process.env.MONGO_URL);
 mongoose.Promise = global.Promise
 
 
 aws.config.update({
-    secretAccessKey: '',
-    accessKeyId: '',
+    secretAccessKey: process.env.S3_SECRET_KEY,
+    accessKeyId: process.env.S3_ACCESS_KEY,
     region: 'us-west-1'
 });
 
