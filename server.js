@@ -14,8 +14,8 @@ var games = require('./app/routes/game.routes.js');
 var gameplays = require('./app/routes/gameplay.routes.js');
 
 var mongo_url = process.env.MONGO_URL || 'mongodb://cdiezm:telefono1@ds159737.mlab.com:59737/playgrounds';
-var s3_secret = process.env.S3_SECRET_KEY || '';
-var s3_access = process.env.S3_ACCESS_KEY || '';
+var s3_secret = process.env.S3_SECRET_KEY || 'ulbcgmzj8JPZYGyYB/ahVaYh9Xhn3TdiU1I4tP9U';
+var s3_access = process.env.S3_ACCESS_KEY || 'AKIAJ4KKPT2KQCGC76ZQ';
 
 mongoose.connect(mongo_url);
 mongoose.Promise = global.Promise
