@@ -13,13 +13,17 @@ var fs = require('fs');
 var games = require('./app/routes/game.routes.js');
 var gameplays = require('./app/routes/gameplay.routes.js');
 
-mongoose.connect(process.env.MONGO_URL);
+var mongo_url = process.env.MONGO_URL || 'mongodb://cdiezm:telefono1@ds159737.mlab.com:59737/playgrounds';
+var s3_secret = process.env.S3_SECRET_KEY || '';
+var s3_access = process.env.S3_ACCESS_KEY || '';
+
+mongoose.connect(mongo_url);
 mongoose.Promise = global.Promise
 
 
 aws.config.update({
-    secretAccessKey: process.env.S3_SECRET_KEY,
-    accessKeyId: process.env.S3_ACCESS_KEY,
+    secretAccessKey: s3_secret,
+    accessKeyId: s3_access,
     region: 'us-west-1'
 });
 
