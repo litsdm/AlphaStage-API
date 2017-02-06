@@ -3,9 +3,12 @@
   "main": "server.js",
   "dependencies": {
     "aws-sdk": "^2.7.21",
+    "bcryptjs": "^2.4.0",
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
     "express": "^4.14.0",
+    "express-jwt": "^5.1.0",
+    "jsonwebtoken": "^7.2.1",
     "mongoose": "^4.7.1",
     "multer": "^1.2.1",
     "multer-s3": "^2.5.0",

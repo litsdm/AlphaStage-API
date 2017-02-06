@@ -7,8 +7,8 @@ var mongoose = require('mongoose');
 var aws = require('aws-sdk');
 var multer = require('multer');
 var multerS3 = require('multer-s3');
-var downloader = require('s3-download-stream');
 var fs = require('fs');
+var jwt = require('express-jwt');
 
 var games = require('./app/routes/game.routes.js');
 var gameplays = require('./app/routes/gameplay.routes.js');
@@ -49,6 +49,18 @@ var upload = multer({
 app.use(compression());
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
+
+app.use(jwt({
+    secret: 'anniepamissecret290296',
+    getToken: function fromHeaderOrCookie (req) { //fromHeaderOrQuerystring
+      if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+        return req.headers.authorization.split(' ')[1];
+      } else if (req.cookies && req.cookies.token) {
+        return req.cookies.token;
+      }
+      return null;
+    }
+  }).unless({path: ['/', '/login', '/sign-up']}));
 
 var port = process.env.PORT || 8080;        // set our port
 
