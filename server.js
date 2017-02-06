@@ -12,6 +12,7 @@ var fs = require('fs');
 
 var games = require('./app/routes/game.routes.js');
 var gameplays = require('./app/routes/gameplay.routes.js');
+var feedback = require('./app/routes/feedback.routes.js');
 
 var mongo_url = process.env.MONGO_URL || 'mongodb://cdiezm:telefono1@ds159737.mlab.com:59737/playgrounds';
 var s3_secret = process.env.S3_SECRET_KEY || '';
@@ -53,25 +54,6 @@ var port = process.env.PORT || 8080;        // set our port
 
 app.post('/upload', upload.single('upl'), function (req, res, next) {
     res.send("Uploaded!");
-});
-
-app.get('/download', function(req, res) {
-  console.log("download accessed");
-  var config = {
-    client: s3,
-    concurrency: 6,
-    params: {
-      Key: "Titan Souls1484806968662.webm",
-      Bucket: 'playgrounds-bucket'
-    }
-  }
-  var options = {
-      Bucket    : '/playgrounds-bucket',
-      Key    : "Titan Souls1484806968662.webm",
-  };
-
-  var fileStream = s3.getObject(options).createReadStream();
-  fileStream.pipe(res);
 });
 
 app.use('/api', games);
