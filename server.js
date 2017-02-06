@@ -51,7 +51,7 @@ app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 
 app.use(jwt({
-    secret: 'anniepamissecret290296',
+    secret: '',
     getToken: function fromHeaderOrCookie (req) { //fromHeaderOrQuerystring
       if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
         return req.headers.authorization.split(' ')[1];

@@ -7,7 +7,7 @@ exports.signUp = function(req, res) {
   newUser.save(function(err, user) {
     if (err) return res.status(500).send(err);
 
-    var token = jwt.sign({ _id: user._id, tag: user.tag }, 'anniepamissecret290296');
+    var token = jwt.sign({ _id: user._id, tag: user.tag }, '');
 
     res.json({ jwt: token });
   });
