@@ -17,6 +17,7 @@ var feedback = require('./app/routes/feedback.routes.js');
 var mongo_url = process.env.MONGO_URL || 'mongodb://cdiezm:telefono1@ds159737.mlab.com:59737/playgrounds';
 var s3_secret = process.env.S3_SECRET_KEY || '';
 var s3_access = process.env.S3_ACCESS_KEY || '';
+var jwt_secret = process.env.JWT_SECRET || '';
 
 mongoose.connect(mongo_url);
 mongoose.Promise = global.Promise
@@ -50,8 +51,8 @@ app.use(compression());
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 
-app.use(jwt({
-    secret: '',
+/*app.use(jwt({
+    secret: jwt_secret,
     getToken: function fromHeaderOrCookie (req) { //fromHeaderOrQuerystring
       if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
         return req.headers.authorization.split(' ')[1];
@@ -60,7 +61,7 @@ app.use(jwt({
       }
       return null;
     }
-  }).unless({path: ['/', '/login', '/sign-up']}));
+  }).unless({path: ['/', '/login', '/sign-up']}));*/
 
 var port = process.env.PORT || 8080;        // set our port
 
