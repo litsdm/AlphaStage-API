@@ -14,3 +14,15 @@ exports.signUp = function(req, res) {
     res.json({ jwt: token });
   });
 }
+
+exports.login = function(req, res) {
+  User.findOne({ email: req.body.email }, function (err, user) {
+    user.comparePassword(req.body.password, function (err, isMatch) {
+      if (!isMatch) {
+        return res.status(401).send({ message: 'Wrong email or password' });
+      }
+      var token = jwt.sign({ _id: user._id }, 'shhhhhhared-secret');
+      res.send({ token: token, user: user });
+    });
+  })
+}

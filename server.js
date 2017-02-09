@@ -71,6 +71,7 @@ app.post('/upload', upload.single('upl'), function (req, res, next) {
 
 app.use('/api', games);
 app.use('/api', gameplays);
+app.use('/api', feedback);
 
 app.listen(port);
 console.log('Magic happens on port ' + port);
