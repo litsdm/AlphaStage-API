@@ -1,7 +1,7 @@
 var User = require('../models/user.js');
 var jwt = require('jsonwebtoken');
 
-var jwt_secret = process.env.JWT_SECRET;
+var jwt_secret = process.env.JWT_SECRET || '';
 
 exports.signUp = function(req, res) {
   var newUser = new User(req.body.user);
