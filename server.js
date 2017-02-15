@@ -63,7 +63,7 @@ app.use(jwt({
       }
       return null;
     }
-  }).unless({path: ['/', '/api/register']}));
+  }).unless({path: ['/', '/register']}));
 
 var port = process.env.PORT || 8080;        // set our port
 
@@ -75,7 +75,7 @@ app.use('/api', games);
 app.use('/api', gameplays);
 app.use('/api', feedback);
 app.use('/api', auth);
-app.use('/api', potentialUser);
+app.use(potentialUser);
 
 app.listen(port);
 console.log('Magic happens on port ' + port);
