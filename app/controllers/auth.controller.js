@@ -1,7 +1,7 @@
 var User = require('../models/user.js');
 var jwt = require('jsonwebtoken');
 
-var jwt_secret = process.env.JWT_SECRET || '';
+var jwt_secret = process.env.JWT_SECRET;
 
 exports.signUp = function(req, res) {
   var newUser = new User(req.body.user);
@@ -9,7 +9,7 @@ exports.signUp = function(req, res) {
   newUser.save(function(err, user) {
     if (err) return res.status(500).send(err);
 
-    var token = jwt.sign({ _id: user._id, username: user.username }, jwt_secret);
+    var token = jwt.sign({ _id: user._id, username: user.username, profilePic: user.profilePic }, jwt_secret);
 
     res.json({ jwt: token });
   });
@@ -21,7 +21,7 @@ exports.login = function(req, res) {
       if (!isMatch) {
         return res.status(401).send({ message: 'Wrong email or password' });
       }
-      var token = jwt.sign({ _id: user._id, username: user.username }, jwt_secret);
+      var token = jwt.sign({ _id: user._id, username: user.username, profilePic: user.profilePic }, jwt_secret);
       res.send({ token: token});
     });
   })

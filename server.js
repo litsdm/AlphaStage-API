@@ -14,11 +14,12 @@ var games = require('./app/routes/game.routes.js');
 var gameplays = require('./app/routes/gameplay.routes.js');
 var feedback = require('./app/routes/feedback.routes.js');
 var auth = require('./app/routes/auth.routes.js');
+var potentialUser = require('./app/routes/potentialUser.routes.js');
 
-var mongo_url = process.env.MONGO_URL || 'mongodb://cdiezm:telefono1@ds159737.mlab.com:59737/playgrounds';
-var s3_secret = process.env.S3_SECRET_KEY || '';
-var s3_access = process.env.S3_ACCESS_KEY || '';
-var jwt_secret = process.env.JWT_SECRET || '';
+var mongo_url = process.env.MONGO_URL;
+var s3_secret = process.env.S3_SECRET_KEY;
+var s3_access = process.env.S3_ACCESS_KEY;
+var jwt_secret = process.env.JWT_SECRET;
 
 mongoose.connect(mongo_url);
 mongoose.Promise = global.Promise
@@ -52,7 +53,7 @@ app.use(compression());
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 
-/*app.use(jwt({
+app.use(jwt({
     secret: jwt_secret,
     getToken: function fromHeaderOrCookie (req) { //fromHeaderOrQuerystring
       if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
@@ -62,7 +63,7 @@ app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
       }
       return null;
     }
-  }).unless({path: ['/', '/login', '/sign-up']}));*/
+  }).unless({path: ['/', '/register']}));
 
 var port = process.env.PORT || 8080;        // set our port
 
@@ -74,6 +75,7 @@ app.use('/api', games);
 app.use('/api', gameplays);
 app.use('/api', feedback);
 app.use('/api', auth);
+app.use('/api', potentialUser);
 
 app.listen(port);
 console.log('Magic happens on port ' + port);
