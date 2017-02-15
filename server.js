@@ -63,7 +63,7 @@ app.use(jwt({
       }
       return null;
     }
-  }).unless({path: ['/', '/register']}));
+  }).unless({path: ['/', '/api/register']}));
 
 var port = process.env.PORT || 8080;        // set our port
 
