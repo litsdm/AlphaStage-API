@@ -1,6 +1,7 @@
 // call the packages we need
 var express = require('express');        // call express
 var app = express();                     // define our app using express
+var exphbs  = require('express-handlebars');
 var bodyParser = require('body-parser');
 var compression = require('compression');
 var mongoose = require('mongoose');
@@ -70,6 +71,13 @@ app.use(jwt({
       return null;
     }
   }).unless({path: ['/', '/register', '/api/signup', '/api/login']}));
+
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
+app.get('/', function (req, res) {
+    res.render('landing');
+});
 
 // Upload route
 app.post('/upload', upload.single('upl'), function (req, res, next) {
