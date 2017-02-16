@@ -10,21 +10,25 @@ var multerS3 = require('multer-s3');
 var fs = require('fs');
 var jwt = require('express-jwt');
 
-var games = require('./app/routes/game.routes.js');
-var gameplays = require('./app/routes/gameplay.routes.js');
-var feedback = require('./app/routes/feedback.routes.js');
-var auth = require('./app/routes/auth.routes.js');
-var potentialUser = require('./app/routes/potentialUser.routes.js');
+// Import routes
+var games = require('./server/routes/game.routes.js');
+var gameplays = require('./server/routes/gameplay.routes.js');
+var feedback = require('./server/routes/feedback.routes.js');
+var auth = require('./server/routes/auth.routes.js');
+var potentialUser = require('./server/routes/potentialUser.routes.js');
 
+// Declare env variables
+var port = process.env.PORT || 8080;
 var mongo_url = process.env.MONGO_URL;
 var s3_secret = process.env.S3_SECRET_KEY;
 var s3_access = process.env.S3_ACCESS_KEY;
 var jwt_secret = process.env.JWT_SECRET;
 
+// Connect to mongoose
 mongoose.connect(mongo_url);
 mongoose.Promise = global.Promise
 
-
+// AWS sdk set up
 aws.config.update({
     secretAccessKey: s3_secret,
     accessKeyId: s3_access,
@@ -33,6 +37,8 @@ aws.config.update({
 
 var s3 = new aws.S3();
 
+
+// Multer setup to upload files to s3
 var upload = multer({
     storage: multerS3({
         s3: s3,
@@ -42,7 +48,7 @@ var upload = multer({
         },
         key: function (req, file, cb) {
             console.log(file);
-            cb(null, file.originalname); //use Date.now() for unique file keys
+            cb(null, file.originalname);
         }
     })
 });
@@ -63,18 +69,20 @@ app.use(jwt({
       }
       return null;
     }
-  }).unless({path: ['/', '/register']}));
+  }).unless({path: ['/', '/register', '/api/signup', '/api/login']}));
 
-var port = process.env.PORT || 8080;        // set our port
-
+// Upload route
 app.post('/upload', upload.single('upl'), function (req, res, next) {
     res.send("Uploaded!");
 });
 
+// API Routes
 app.use('/api', games);
 app.use('/api', gameplays);
 app.use('/api', feedback);
 app.use('/api', auth);
+
+// Landing page signups route
 app.use(potentialUser);
 
 app.listen(port);
