@@ -1,4 +1,5 @@
 var Game = require('../models/game');
+var User = require('../models/user');
 var sanitizeHtml = require('sanitize-html');
 
 exports.addGame = function(req, res) {
@@ -10,10 +11,17 @@ exports.addGame = function(req, res) {
   newGame.backgroundImg = sanitizeHtml(newGame.backgroundImg);
 
   newGame.save((err, saved) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-    res.json({ game: saved });
+    if (err) { res.status(500).send(err); }
+
+    // Add game to user games
+    User.findByIdAndUpdate(req.body.userId,
+      { $push: { games: saved } }, // Update
+      { safe: true, upsert: true }, // Options
+      function(err, user) { // Callback
+      if (err) { res.status(500).send(err); }
+
+      res.json({ game: saved });
+    });
   });
 }
 

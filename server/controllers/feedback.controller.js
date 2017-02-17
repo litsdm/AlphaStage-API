@@ -18,10 +18,6 @@ exports.addFeedback = function(req, res) {
 
 exports.getFeedbacks = function(req, res) {
   Feedback.find()
-  .populate({
-    path: 'game',
-    select: 'name img playCount _id'
-  })
   .populate('gameplay')
   .exec(function(err, feedbacks) {
     if (err) {

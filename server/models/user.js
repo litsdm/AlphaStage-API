@@ -8,7 +8,8 @@ var UserSchema = new Schema({
   email       : { type: String, unique: true, required: true },
   password    : { type: String, required: true },
   username    : { type: String, required: true },
-  profilePic  : { type: String, default: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png' }
+  profilePic  : { type: String, default: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png' },
+  games       : [{ type: Schema.Types.ObjectId, ref: 'Game' }]
 });
 
 UserSchema.pre('save', function(next){

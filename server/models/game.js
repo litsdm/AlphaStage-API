@@ -15,7 +15,8 @@ var GameSchema = new Schema({
     linux: Boolean
   },
   releaseDate: Date,
-  feedbacks: [{ type: Schema.Types.ObjectId, ref: 'Feedback' }]
+  feedbacks: [{ type: Schema.Types.ObjectId, ref: 'Feedback' }],
+  developer: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
 module.exports = mongoose.model('Game', GameSchema);
