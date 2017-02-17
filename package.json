@@ -2,7 +2,10 @@
   "name": "playgrounds-api",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node ./bin/www"
+  },
+  "engines": {
+    "node": "6.9.1"
   },
   "dependencies": {
     "aws-sdk": "^2.7.21",
