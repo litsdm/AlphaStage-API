@@ -21,10 +21,10 @@ var potentialUser = require('./server/routes/potentialUser.routes.js');
 
 // Declare env variables
 var port = process.env.PORT || 8080;
-var mongo_url = process.env.MONGO_URL;
+var mongo_url = process.env.MONGO_URL || 'mongodb://cdiezm:telefono1@ds159737.mlab.com:59737/playgrounds';
 var s3_secret = process.env.S3_SECRET_KEY;
 var s3_access = process.env.S3_ACCESS_KEY;
-var jwt_secret = process.env.JWT_SECRET;
+var jwt_secret = process.env.JWT_SECRET || 'anniepamissecret290296';
 
 // Connect to mongoose
 mongoose.connect(mongo_url);

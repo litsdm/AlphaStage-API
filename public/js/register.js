@@ -22,16 +22,6 @@ $(function () {
       return
     }
 
-    var xhttp = new XMLHttpRequest();
-    var url = 'https://astagegames.herokuapp.com/register';
-    xhttp.open("POST", url, true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.onreadystatechange = function () { //Call a function when the state changes.
-      if (xhttp.readyState == 4 && xhttp.status == 200) {
-          alert(xhttp.responseText);
-      }
-    }
-
     var potentialUser = {
       user: {
         email: email,
@@ -39,7 +29,18 @@ $(function () {
       }
     }
 
-    xhttp.send(JSON.stringify(potentialUser));
+    $.ajax({
+      type: 'POST',
+      url: '/register',
+      data: JSON.stringify(potentialUser),
+      contentType: 'application/json',
+      success: function(data) {
+        console.log(data);
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    });
   });
 
   function validateEmail(email) {
