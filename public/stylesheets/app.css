@@ -1,0 +1,121 @@
+body {
+  background-color: #222;
+  color: white;
+}
+
+.header {
+  background: #eee url('../images/circuitTopBG.png') center no-repeat;
+  background-attachment: fixed;
+  background-size: cover;;
+  overflow: hidden;
+  height: 80vh;
+  color: white;
+}
+
+#title {
+  position: absolute;
+  top: 25%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin-top: -60px;
+  padding-left: 10px;
+  font-weight: 400;
+  font-size: 38pt;
+}
+
+#title h1 {
+  margin-top: 0;
+  font-size: 38pt;
+  color: #ddd;
+}
+
+.phrase {
+  font-size: 32pt;
+  color: #fff;
+}
+
+.phrase p {
+  width: 60%;
+  margin: auto;
+}
+
+.btn-signup {
+  color: white;
+  background-color: #0091EA;
+  font-size: 14pt;
+  border-radius: 24px;
+  padding: 5px 20px;
+  transition: all .2s ease-out;
+}
+
+.btn-signup.green {
+  background-color: #00C853;
+}
+
+.btn-signup.green:hover {
+  color: white;
+  padding: 5px 30px;
+  background-color: #00E676;
+}
+
+.btn-signup:hover {
+  color: white;
+  padding: 5px 30px;
+  background-color: #00B0FF;
+}
+
+.navbar-transparent {
+  background-color: transparent;
+}
+
+.nav li a, .navbar-brand {
+  color: #75A0D1;
+  transition: color 0.2s ease-in;
+}
+
+.nav li a:hover, .navbar-brand:hover {
+  color: #3d82d1;
+  background-color: transparent;
+}
+
+.fill-out {
+  color: #0C0D28;
+  width: 100%;
+  font-size: 18px;
+}
+
+.email-input {
+  width: 40%;
+  padding: 5px 10px;
+  border: none
+}
+
+.dev-select {
+  background-color: #eee;
+  color: #777;
+  padding: 7px 10px;
+  text-decoration: none;
+}
+
+.dev-select.active {
+  background-color: #00B0FF;
+  color: white;
+}
+
+.player-select.active {
+  background-color: #00E676;
+  color: white;
+}
+
+.player-select {
+  background-color: #eee;
+  color: #777;
+  padding: 7px 10px;
+  margin-left: -5px;
+  text-decoration: none;
+}
+
+.player-select:hover, .player-select:focus, .dev-select:hover, .dev-select:focus {
+  text-decoration: none;
+}

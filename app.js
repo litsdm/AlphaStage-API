@@ -10,6 +10,7 @@ var multer = require('multer');
 var multerS3 = require('multer-s3');
 var fs = require('fs');
 var jwt = require('express-jwt');
+var path = require('path');
 
 // Import routes
 var games = require('./server/routes/game.routes.js');
@@ -20,10 +21,10 @@ var potentialUser = require('./server/routes/potentialUser.routes.js');
 
 // Declare env variables
 var port = process.env.PORT || 8080;
-var mongo_url = process.env.MONGO_URL;
-var s3_secret = process.env.S3_SECRET_KEY;
-var s3_access = process.env.S3_ACCESS_KEY;
-var jwt_secret = process.env.JWT_SECRET;
+var mongo_url = process.env.MONGO_URL || 'mongodb://cdiezm:telefono1@ds159737.mlab.com:59737/playgrounds';
+var s3_secret = process.env.S3_SECRET_KEY || 'yvwjwhJeNWPA6oRxgWxAKTgBMGpHKEzNyH4OmlvG';
+var s3_access = process.env.S3_ACCESS_KEY || 'AKIAIUFDJSTIQ35HF5EQ';
+var jwt_secret = process.env.JWT_SECRET || 'anniepamissecret290296';
 
 // Connect to mongoose
 mongoose.connect(mongo_url);
@@ -60,6 +61,10 @@ app.use(compression());
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+app.use('/static', express.static(path.join(__dirname, 'public')))
+
 app.use(jwt({
     secret: jwt_secret,
     getToken: function fromHeaderOrCookie (req) { //fromHeaderOrQuerystring
@@ -71,9 +76,6 @@ app.use(jwt({
       return null;
     }
   }).unless({path: ['/', '/register', '/api/signup', '/api/login']}));
-
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
 
 app.get('/', function (req, res) {
     res.render('landing');

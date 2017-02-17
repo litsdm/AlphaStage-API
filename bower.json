@@ -1,0 +1,23 @@
+{
+  "name": "playgrounds-api",
+  "description": "Backend + landing page for Alpha Stage desktop app",
+  "main": "app.js",
+  "authors": [
+    "Carlos Diez <cdiezmoran@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/cdiezmoran/playgrounds-API",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "bootstrap": "^3.3.7"
+  }
+}
