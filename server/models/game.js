@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var GameSchema = new Schema({
+  createdAt: Date,
+  updatedAt: Date,
   name: String,
   description: String,
   img: String,
@@ -17,6 +19,17 @@ var GameSchema = new Schema({
   releaseDate: Date,
   feedbacks: [{ type: Schema.Types.ObjectId, ref: 'Feedback' }],
   developer: { type: Schema.Types.ObjectId, ref: 'User' }
+});
+
+GameSchema.pre('save', function(next){
+  // SET createdAt AND updatedAt
+  var now = new Date();
+  this.updatedAt = now;
+  if ( !this.createdAt ) {
+    this.createdAt = now;
+  }
+
+  next();
 });
 
 module.exports = mongoose.model('Game', GameSchema);
