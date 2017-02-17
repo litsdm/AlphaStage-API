@@ -1,6 +1,9 @@
 {
   "name": "playgrounds-api",
   "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
     "aws-sdk": "^2.7.21",
     "bcryptjs": "^2.4.0",
