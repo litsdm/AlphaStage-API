@@ -2,7 +2,7 @@ var Game = require('../models/game');
 var User = require('../models/user');
 var sanitizeHtml = require('sanitize-html');
 
-exports.addGame = function(req, res) {
+exports.addGame = function(req, res, next) {
   var newGame = new Game(req.body.game);
 
   newGame.name = sanitizeHtml(newGame.name);
@@ -13,15 +13,19 @@ exports.addGame = function(req, res) {
   newGame.save((err, saved) => {
     if (err) { res.status(500).send(err); }
 
-    // Add game to user games
-    User.findByIdAndUpdate(newGame.developer,
-      { $push: { games: saved } }, // Update
-      { safe: true, upsert: true }, // Options
-      function(err, user) { // Callback
-      if (err) { res.status(500).send(err); }
+    res.json({ game: saved });
 
-      res.json({ game: saved });
-    });
+    req.game = saved;
+    next();
+  });
+}
+
+exports.addGameToDeveloper = function(req, res, next) {
+  User.findByIdAndUpdate(req.game.developer,
+    { $push: { games: req.game._id } }, // Update
+    { upsert: true }, // Options
+    function(err, user) { // Callback
+    if (err) { res.status(500).send(err); }
   });
 }
 

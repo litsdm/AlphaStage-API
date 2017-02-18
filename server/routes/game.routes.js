@@ -3,7 +3,7 @@ var router = express.Router();
 var GameController = require('../controllers/game.controller.js');
 
 // Add game
-router.route('/games').post(GameController.addGame);
+router.route('/games').post(GameController.addGame, GameController.addGameToDeveloper);
 
 // Get all games
 router.route('/games').get(GameController.getGames);
