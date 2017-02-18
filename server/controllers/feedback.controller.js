@@ -1,7 +1,8 @@
 var Feedback = require('../models/feedback');
+var Game = require('../models/game');
 var sanitizeHtml = require('sanitize-html');
 
-exports.addFeedback = function(req, res) {
+exports.addFeedback = function(req, res, next) {
   var newFeedback = new Feedback(req.body.feedback);
 
   newFeedback.good = sanitizeHtml(newFeedback.good);
@@ -9,11 +10,21 @@ exports.addFeedback = function(req, res) {
   newFeedback.best = sanitizeHtml(newFeedback.best);
 
   newFeedback.save((err, saved) => {
-    if (err) {
-      res.status(500).send(err);
-    }
+    if (err) { res.status(500).send(err); }
+
     res.json({ feedback: saved });
+
+    req.feedback = saved;
+    next();
   });
+}
+
+exports.addFeedbackToGame = function(req, res, next) {
+  Game.findByIdAndUpdate(req.feedback.game,
+    { $push: { feedbacks: req.feedback._id } }, // Update
+    { upsert: true }, // Options
+    function(err, game) {
+    });
 }
 
 exports.getFeedbacks = function(req, res) {

@@ -14,7 +14,7 @@ exports.addGame = function(req, res) {
     if (err) { res.status(500).send(err); }
 
     // Add game to user games
-    User.findByIdAndUpdate(req.body.userId,
+    User.findByIdAndUpdate(newGame.developer,
       { $push: { games: saved } }, // Update
       { safe: true, upsert: true }, // Options
       function(err, user) { // Callback

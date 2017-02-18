@@ -3,7 +3,7 @@ var router = express.Router();
 var FeedbackController = require('../controllers/feedback.controller.js');
 
 // Add feedback
-router.route('/feedbacks').post(FeedbackController.addFeedback);
+router.route('/feedbacks').post(FeedbackController.addFeedback, FeedbackController.addFeedbackToGame);
 
 // Get all feedbacks
 router.route('/feedbacks').get(FeedbackController.getFeedbacks);
