@@ -39,6 +39,28 @@ exports.getGames = function(req, res) {
   });
 }
 
+exports.getDeveloperGames = function(req, res) {
+  User.findById(req.params.dev_id)
+  .populate({
+    path: 'games',
+    model: 'Game',
+    select: 'name _id feedbacks',
+    populate: {
+      path: 'feedbacks',
+      model: 'Feedback',
+      populate: {
+        path: 'gameplay',
+        model: 'Gameplay'
+      }
+    }
+  })
+  .exec(function(err, dev) {
+    if (err) { res.status(500).send(err); }
+
+    res.json({ games: dev.games })
+  });
+}
+
 exports.getGame = function(req, res) {
   Game.findById(req.params.game_id, function(err, game) {
     if (err) {

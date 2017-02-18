@@ -17,4 +17,7 @@ router.route('/games/:game_id').put(GameController.editGame);
 // Delete game
 router.route('/games/:game_id').delete(GameController.deleteGame);
 
+// Get dev games
+router.route('/games/from/:dev_id').get(GameController.getDeveloperGames);
+
 module.exports = router;
