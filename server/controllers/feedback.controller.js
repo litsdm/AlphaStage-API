@@ -99,6 +99,8 @@ exports.markFeedback = function(req, res) {
     { $set: { mark: req.body.mark } },
     function(err, feedback) {
       if(err) { res.status(500).send(err) }
+
+      res.json({ feedback: feedback })
     }
   );
 }
