@@ -44,10 +44,11 @@ exports.getDeveloperGames = function(req, res) {
   .populate({
     path: 'games',
     model: 'Game',
-    select: 'name _id feedbacks',
+    select: 'name _id feedbacks backgroundImg',
     populate: {
       path: 'feedbacks',
       model: 'Feedback',
+      options: { sort: { 'createdAt': -1 } },
       populate: {
         path: 'gameplay',
         model: 'Gameplay'

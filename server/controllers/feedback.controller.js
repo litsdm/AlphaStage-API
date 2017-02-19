@@ -93,3 +93,12 @@ exports.deleteFeedback = function(req, res) {
     res.json({ message: 'Successfully deleted' });
   });
 }
+
+exports.markFeedback = function(req, res) {
+  Feedback.findByIdAndUpdate(req.body.feedbackId,
+    { $set: { mark: req.body.mark } },
+    function(err, feedback) {
+      if(err) { res.status(500).send(err) }
+    }
+  );
+}

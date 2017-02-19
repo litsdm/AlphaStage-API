@@ -9,7 +9,7 @@ var FeedbackSchema = new Schema({
   best: String,
   gameplay: { type: Schema.Types.ObjectId, ref: 'Gameplay' },
   game: { type: Schema.Types.ObjectId, ref: 'Game' },
-  seen: Boolean
+  mark: { type: Number, default: 0 }
 });
 
 FeedbackSchema.pre('save', function(next){

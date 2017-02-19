@@ -17,4 +17,7 @@ router.route('/feedbacks/:feedback_id').put(FeedbackController.editFeedback);
 // Delete feedback
 router.route('/feedbacks/:feedback_id').delete(FeedbackController.deleteFeedback);
 
+// Update feedback mark
+router.route('/feedbacks/mark').delete(FeedbackController.markFeedback);
+
 module.exports = router;
