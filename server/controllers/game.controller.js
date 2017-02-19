@@ -50,8 +50,8 @@ exports.getDeveloperGames = function(req, res) {
       model: 'Feedback',
       options: { sort: { 'createdAt': -1 } },
       populate: {
-        path: 'gameplay',
-        model: 'Gameplay'
+        path: 'gameplay sender',
+        select: 'username _id cloudfrontURL'
       }
     }
   })

@@ -9,7 +9,9 @@ var FeedbackSchema = new Schema({
   best: String,
   gameplay: { type: Schema.Types.ObjectId, ref: 'Gameplay' },
   game: { type: Schema.Types.ObjectId, ref: 'Game' },
-  mark: { type: Number, default: 0 }
+  mark: { type: Number, default: 0 },
+  overallUX: { type: String, default: "Good experience" },
+  sender: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
 FeedbackSchema.pre('save', function(next){
