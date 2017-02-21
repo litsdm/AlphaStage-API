@@ -30,7 +30,7 @@ exports.addGameToDeveloper = function(req, res, next) {
 }
 
 exports.getGames = function(req, res) {
-  Game.find(function(err, games) {
+  Game.find().sort('-createdAt').exec(function(err, games) {
     if (err) {
       res.send(err);
     }
