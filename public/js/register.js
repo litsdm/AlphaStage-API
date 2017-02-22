@@ -18,7 +18,7 @@ $(function () {
     var isDeveloper = isDev();
 
     if (!validateEmail(email)) {
-      alert('Invalid email');
+      swal("Invalid email", "", "error");
       return
     }
 
@@ -35,12 +35,36 @@ $(function () {
       data: JSON.stringify(potentialUser),
       contentType: 'application/json',
       success: function(data) {
+        swal("Good job!", "You clicked the button!", "success");
+      },
+      error: function(err) {
+        swal("There was an error!", err, "error");
+      }
+    });
+
+    var mailchimpUser = {
+      email_address: email,
+      status: 'subscribed'
+    }
+
+    var listID = process.env.INTERESTED_LIST_ID;
+    var mailchimpApiKey = process.env.MAILCHIMP_API_KEY;
+
+    $.ajax({
+      type: 'POST',
+      url: 'https://us15.api.mailchimp.com/3.0/lists/' + listID + '/members',
+      data: JSON.stringify(mailchimpUser),
+      contentType: 'application/json',
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader ("Authorization", 'Basic ' + new Buffer('alphastage:' + mailchimpApiKey ).toString('base64'));
+      },
+      success: function(data) {
         console.log(data);
       },
       error: function(err) {
         console.log(err);
       }
-    });
+    })
   });
 
   function validateEmail(email) {
