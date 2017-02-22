@@ -47,8 +47,10 @@ $(function () {
       status: 'subscribed'
     }
 
-    var listID = process.env.INTERESTED_LIST_ID;
-    var mailchimpApiKey = process.env.MAILCHIMP_API_KEY;
+    var listID = '6f7d8c131d';
+    var mailchimpApiKey = 'aa2cd30d5e8312ffaec744b0b01c6095-us15';
+
+    var user = 'alphastage'
 
     $.ajax({
       type: 'POST',
@@ -56,7 +58,7 @@ $(function () {
       data: JSON.stringify(mailchimpUser),
       contentType: 'application/json',
       beforeSend: function (xhr) {
-        xhr.setRequestHeader ("Authorization", 'Basic ' + new Buffer('alphastage:' + mailchimpApiKey ).toString('base64'));
+        xhr.setRequestHeader ("Authorization", make_base_auth(user, mailchimpApiKey));
       },
       success: function(data) {
         console.log(data);
@@ -66,6 +68,12 @@ $(function () {
       }
     })
   });
+
+  function make_base_auth(user, password) {
+    var tok = user + ':' + password;
+    var hash = btoa(tok);
+    return 'Basic ' + hash;
+  }
 
   function validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
