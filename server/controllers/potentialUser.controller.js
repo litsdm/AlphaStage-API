@@ -21,7 +21,7 @@ exports.addPotentialUser = function(req, res, next) {
           res.send(err);
         }
 
-        res.json({ message: "Thank you for signing up!" })
+        //res.json({ message: "Thank you for signing up!" })
         next();
       });
     }
