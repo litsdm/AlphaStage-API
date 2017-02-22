@@ -14,11 +14,11 @@ var GameSchema = new Schema({
   availableOn: {
     windows: Boolean,
     macOS: Boolean,
-    linux: Boolean
   },
   releaseDate: Date,
   feedbacks: [{ type: Schema.Types.ObjectId, ref: 'Feedback' }],
-  developer: { type: Schema.Types.ObjectId, ref: 'User' }
+  developer: { type: Schema.Types.ObjectId, ref: 'User' },
+  cloudfrontURL: String
 });
 
 GameSchema.pre('save', function(next){
