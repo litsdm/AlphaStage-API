@@ -2,12 +2,12 @@ var User = require('../models/potentialUser.js');
 var request = require('superagent');
 
 
-exports.addPotentialUser = function(req, res) {
+exports.addPotentialUser = function(req, res, next) {
   var newUser = new User(req.body.user);
 
   console.log(req.body.user);
 
-  User.findOne({ 'email': newUser.email }).exec(function(err, user, next) {
+  User.findOne({ 'email': newUser.email }).exec(function(err, user) {
     if (err) {
       res.send(err);
     }
