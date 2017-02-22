@@ -8,7 +8,7 @@ body {
   background-attachment: fixed;
   background-size: cover;;
   overflow: hidden;
-  height: 80vh;
+  height: 100vh;
   color: white;
 }
 
@@ -65,17 +65,17 @@ body {
   background-color: #00B0FF;
 }
 
-.navbar-transparent {
-  background-color: transparent;
+.navbar-blue {
+  background-color: rgba(50,66,93, 0.8);
 }
 
 .nav li a, .navbar-brand {
-  color: #75A0D1;
+  color: #ccc;
   transition: color 0.2s ease-in;
 }
 
 .nav li a:hover, .navbar-brand:hover {
-  color: #3d82d1;
+  color: #fff;
   background-color: transparent;
 }
 
@@ -118,4 +118,13 @@ body {
 
 .player-select:hover, .player-select:focus, .dev-select:hover, .dev-select:focus {
   text-decoration: none;
+}
+
+.videoplay-btn {
+  color: #ddd;
+  font-size: 16rem;
+}
+
+.videoplay-btn:hover {
+  color: #fff;
 }

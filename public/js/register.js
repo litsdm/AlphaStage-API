@@ -92,4 +92,9 @@ $(function () {
 
     updateSignUpButton();
   })
+
+  $('.videoplay-btn').click(function(e) {
+    e.preventDefault();
+    $('#video-modal').modal();
+  })
 })
