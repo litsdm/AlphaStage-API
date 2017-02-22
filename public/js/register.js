@@ -35,38 +35,12 @@ $(function () {
       data: JSON.stringify(potentialUser),
       contentType: 'application/json',
       success: function(data) {
-        swal("Good job!", "You clicked the button!", "success");
+        swal("Thank you for subscribing!", "Your mail has been added to our list!", "success");
       },
       error: function(err) {
         swal("There was an error!", err, "error");
       }
     });
-
-    var mailchimpUser = {
-      email_address: email,
-      status: 'subscribed'
-    }
-
-    var listID = '6f7d8c131d';
-    var mailchimpApiKey = 'aa2cd30d5e8312ffaec744b0b01c6095-us15';
-
-    var user = 'alphastage'
-
-    $.ajax({
-      type: 'POST',
-      url: 'https://us15.api.mailchimp.com/3.0/lists/' + listID + '/members',
-      data: JSON.stringify(mailchimpUser),
-      contentType: 'application/json',
-      beforeSend: function (xhr) {
-        xhr.setRequestHeader ("Authorization", make_base_auth(user, mailchimpApiKey));
-      },
-      success: function(data) {
-        console.log(data);
-      },
-      error: function(err) {
-        console.log(err);
-      }
-    })
   });
 
   function make_base_auth(user, password) {
