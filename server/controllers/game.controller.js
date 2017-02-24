@@ -81,7 +81,7 @@ exports.getUserGames = function(req, res) {
   .exec(function(err, user) {
     if (err) { res.status(500).send(err); }
 
-    res.json({ games: user.games })
+    res.json({ games: user.downloadedGames })
   });
 }
 
