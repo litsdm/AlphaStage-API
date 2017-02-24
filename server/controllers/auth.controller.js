@@ -9,7 +9,7 @@ exports.signUp = function(req, res) {
   newUser.save(function(err, user) {
     if (err) return res.status(500).send(err);
 
-    var token = jwt.sign({ _id: user._id, username: user.username, profilePic: user.profilePic }, jwt_secret);
+    var token = jwt.sign({ _id: user._id, username: user.username, profilePic: user.profilePic, isDeveloper: user.isDeveloper }, jwt_secret);
 
     res.json({ jwt: token });
   });
@@ -17,12 +17,17 @@ exports.signUp = function(req, res) {
 
 exports.login = function(req, res) {
   User.findOne({ email: req.body.email }, function (err, user) {
-    user.comparePassword(req.body.password, function (err, isMatch) {
-      if (!isMatch) {
-        return res.status(401).send({ message: 'Wrong email or password' });
-      }
-      var token = jwt.sign({ _id: user._id, username: user.username, profilePic: user.profilePic }, jwt_secret);
-      res.send({ token: token});
-    });
+    if (!user) {
+      res.send({ message: "Email not found." })
+    }
+    else {
+      user.comparePassword(req.body.password, function (err, isMatch) {
+        if (!isMatch) {
+          return res.send({ message: 'Incorrect password, please try again.' });
+        }
+        var token = jwt.sign({ _id: user._id, username: user.username, profilePic: user.profilePic, isDeveloper: user.isDeveloper }, jwt_secret);
+        res.send({ token: token});
+      });
+    }
   })
 }
