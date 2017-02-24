@@ -3,14 +3,15 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-  createdAt   : { type: Date },
-  updatedAt   : { type: Date },
-  email       : { type: String, unique: true, required: true },
-  password    : { type: String, required: true },
-  username    : { type: String, required: true },
-  profilePic  : { type: String, default: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png' },
-  games       : [{ type: Schema.Types.ObjectId, ref: 'Game' }],
-  isDeveloper : { type: Boolean }
+  createdAt       : { type: Date },
+  updatedAt       : { type: Date },
+  email           : { type: String, unique: true, required: true },
+  password        : { type: String, required: true },
+  username        : { type: String, required: true },
+  profilePic      : { type: String, default: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png' },
+  games           : [{ type: Schema.Types.ObjectId, ref: 'Game' }],
+  downloadedGames : [{ type: Schema.Types.ObjectId, ref: 'Game' }],
+  isDeveloper     : { type: Boolean }
 });
 
 UserSchema.pre('save', function(next){

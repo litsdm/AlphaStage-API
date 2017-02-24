@@ -29,6 +29,15 @@ exports.addGameToDeveloper = function(req, res, next) {
   });
 }
 
+exports.addGameToUser = function(req, res, next) {
+  User.findByIdAndUpdate(req.game.user,
+    { $push: { downloadedGames: req.game._id } }, // Update
+    { upsert: true }, // Options
+    function(err, user) { // Callback
+    if (err) { res.status(500).send(err); }
+  });
+}
+
 exports.getGames = function(req, res) {
   Game.find().sort('-createdAt').exec(function(err, games) {
     if (err) {
@@ -59,6 +68,20 @@ exports.getDeveloperGames = function(req, res) {
     if (err) { res.status(500).send(err); }
 
     res.json({ games: dev.games })
+  });
+}
+
+exports.getUserGames = function(req, res) {
+  User.findById(req.params.dev_id)
+  .populate({
+    path: 'downloadedGames',
+    model: 'Game',
+    select: 'name _id img'
+  })
+  .exec(function(err, user) {
+    if (err) { res.status(500).send(err); }
+
+    res.json({ games: user.games })
   });
 }
 

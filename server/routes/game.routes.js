@@ -18,6 +18,12 @@ router.route('/games/:game_id').put(GameController.editGame);
 router.route('/games/:game_id').delete(GameController.deleteGame);
 
 // Get dev games
-router.route('/games/from/:dev_id').get(GameController.getDeveloperGames);
+router.route('/games/by/:dev_id').get(GameController.getDeveloperGames);
+
+// Get user games
+router.route('/games/from/:user_id').get(GameController.getUserGames);
+
+// Add game to user
+router.route('/games/downloaded').post(GameController.addGameToUser);
 
 module.exports = router;
