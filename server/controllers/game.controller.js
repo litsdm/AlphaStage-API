@@ -30,8 +30,8 @@ exports.addGameToDeveloper = function(req, res, next) {
 }
 
 exports.addGameToUser = function(req, res, next) {
-  User.findByIdAndUpdate(req.game.user,
-    { $push: { downloadedGames: req.game._id } }, // Update
+  User.findByIdAndUpdate(req.body.userId,
+    { $push: { downloadedGames: req.body.gameId } }, // Update
     { upsert: true }, // Options
     function(err, user) { // Callback
     if (err) { res.status(500).send(err); }
@@ -72,7 +72,7 @@ exports.getDeveloperGames = function(req, res) {
 }
 
 exports.getUserGames = function(req, res) {
-  User.findById(req.params.dev_id)
+  User.findById(req.params.user_id)
   .populate({
     path: 'downloadedGames',
     model: 'Game',
