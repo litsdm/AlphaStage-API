@@ -22,8 +22,8 @@ var potentialUser = require('./server/routes/potentialUser.routes.js');
 // Declare env variables
 var port = process.env.PORT || 8080;
 var mongo_url = process.env.MONGO_URL;
-var s3_secret = process.env.S3_SECRET_KEY;
-var s3_access = process.env.S3_ACCESS_KEY;
+var s3_secret = process.env.AWS_SECRET_ACCESS_KEY;
+var s3_access = process.env.AWS_ACCESS_KEY_ID;
 var jwt_secret = process.env.JWT_SECRET;
 
 // Connect to mongoose

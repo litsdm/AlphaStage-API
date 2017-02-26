@@ -18,7 +18,8 @@ var GameSchema = new Schema({
   releaseDate: Date,
   feedbacks: [{ type: Schema.Types.ObjectId, ref: 'Feedback' }],
   developer: { type: Schema.Types.ObjectId, ref: 'User' },
-  cloudfrontURL: String
+  macBuildURL: String,
+  winBuildURL: String
 });
 
 GameSchema.pre('save', function(next){
