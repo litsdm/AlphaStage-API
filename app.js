@@ -18,14 +18,14 @@ var gameplays = require('./server/routes/gameplay.routes.js');
 var feedback = require('./server/routes/feedback.routes.js');
 var auth = require('./server/routes/auth.routes.js');
 var potentialUser = require('./server/routes/potentialUser.routes.js');
-var upload = require('./server/routes/upload.routes.js');
+var directUpload = require('./server/routes/upload.routes.js');
 
 // Declare env variables
 var port = process.env.PORT || 8080;
-var mongo_url = process.env.MONGO_URL;
+var mongo_url = process.env.MONGO_URL || 'mongodb://cdiezm:telefono1@ds159737.mlab.com:59737/playgrounds';
 var s3_secret = process.env.AWS_SECRET_ACCESS_KEY;
 var s3_access = process.env.AWS_ACCESS_KEY_ID;
-var jwt_secret = process.env.JWT_SECRET;
+var jwt_secret = process.env.JWT_SECRET || "anniepamissecret290296";
 
 // Connect to mongoose
 mongoose.connect(mongo_url);
@@ -92,7 +92,7 @@ app.use('/api', games);
 app.use('/api', gameplays);
 app.use('/api', feedback);
 app.use('/api', auth);
-app.use('/api', upload);
+app.use('/api', directUpload);
 
 // Landing page signups route
 app.use(potentialUser);
