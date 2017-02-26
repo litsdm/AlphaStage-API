@@ -18,6 +18,7 @@ var gameplays = require('./server/routes/gameplay.routes.js');
 var feedback = require('./server/routes/feedback.routes.js');
 var auth = require('./server/routes/auth.routes.js');
 var potentialUser = require('./server/routes/potentialUser.routes.js');
+var upload = require('./server/routes/upload.routes.js');
 
 // Declare env variables
 var port = process.env.PORT || 8080;
@@ -91,6 +92,7 @@ app.use('/api', games);
 app.use('/api', gameplays);
 app.use('/api', feedback);
 app.use('/api', auth);
+app.use('/api', upload);
 
 // Landing page signups route
 app.use(potentialUser);
