@@ -19,7 +19,9 @@ var GameSchema = new Schema({
   feedbacks: [{ type: Schema.Types.ObjectId, ref: 'Feedback' }],
   developer: { type: Schema.Types.ObjectId, ref: 'User' },
   macBuildURL: String,
-  winBuildURL: String
+  winBuildURL: String,
+  macFilename: String,
+  winFilename: String
 });
 
 GameSchema.pre('save', function(next){

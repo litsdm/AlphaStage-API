@@ -35,6 +35,8 @@ exports.addGameToUser = function(req, res, next) {
     { upsert: true }, // Options
     function(err, user) { // Callback
     if (err) { res.status(500).send(err); }
+
+    res.json({ message: "User added!" });
   });
 }
 
