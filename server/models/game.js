@@ -21,7 +21,8 @@ var GameSchema = new Schema({
   macBuildURL: String,
   winBuildURL: String,
   macFilename: String,
-  winFilename: String
+  winFilename: String,
+  winExe: String
 });
 
 GameSchema.pre('save', function(next){
