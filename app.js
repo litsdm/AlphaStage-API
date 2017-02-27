@@ -22,10 +22,10 @@ var directUpload = require('./server/routes/upload.routes.js');
 
 // Declare env variables
 var port = process.env.PORT || 8080;
-var mongo_url = process.env.MONGO_URL || 'mongodb://cdiezm:telefono1@ds159737.mlab.com:59737/playgrounds';
+var mongo_url = process.env.MONGO_URL;
 var s3_secret = process.env.AWS_SECRET_ACCESS_KEY;
 var s3_access = process.env.AWS_ACCESS_KEY_ID;
-var jwt_secret = process.env.JWT_SECRET || "anniepamissecret290296";
+var jwt_secret = process.env.JWT_SECRET;
 
 // Connect to mongoose
 mongoose.connect(mongo_url);

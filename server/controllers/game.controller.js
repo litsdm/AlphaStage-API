@@ -22,7 +22,7 @@ exports.addGame = function(req, res, next) {
 
 exports.addGameToDeveloper = function(req, res, next) {
   User.findByIdAndUpdate(req.game.developer,
-    { $push: { games: req.game._id } }, // Update
+    { $addToSet: { games: req.game._id } }, // Update
     { upsert: true }, // Options
     function(err, user) { // Callback
     if (err) { res.status(500).send(err); }
