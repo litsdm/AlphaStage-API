@@ -22,7 +22,7 @@ var directUpload = require('./server/routes/upload.routes.js');
 
 // Declare env variables
 var port = process.env.PORT || 8080;
-var mongo_url = process.env.MONGO_URL;
+var mongo_url = process.env.MONGO_URI;
 var s3_secret = process.env.AWS_SECRET_ACCESS_KEY;
 var s3_access = process.env.AWS_ACCESS_KEY_ID;
 var jwt_secret = process.env.JWT_SECRET;
