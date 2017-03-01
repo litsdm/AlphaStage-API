@@ -22,6 +22,9 @@ UserSchema.pre('save', function(next){
     this.createdAt = now;
   };
 
+  this.downloadedGames = []
+  this.games = []
+
   // ENCRYPT PASSWORD
   var user = this;
   if (!user.isModified('password')) {
