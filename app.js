@@ -5,10 +5,6 @@ var exphbs  = require('express-handlebars');
 var bodyParser = require('body-parser');
 var compression = require('compression');
 var mongoose = require('mongoose');
-var aws = require('aws-sdk');
-var multer = require('multer');
-var multerS3 = require('multer-s3');
-var fs = require('fs');
 var jwt = require('express-jwt');
 var path = require('path');
 
@@ -31,31 +27,6 @@ var jwt_secret = process.env.JWT_SECRET;
 mongoose.connect(mongo_url);
 mongoose.Promise = global.Promise
 
-// AWS sdk set up
-aws.config.update({
-    secretAccessKey: s3_secret,
-    accessKeyId: s3_access,
-    region: 'us-west-1'
-});
-
-var s3 = new aws.S3();
-
-
-// Multer setup to upload files to s3
-var upload = multer({
-    storage: multerS3({
-        s3: s3,
-        bucket: 'playgrounds-bucket',
-        metadata: function (req, file, cb) {
-          cb(null, {fieldName: file.fieldname});
-        },
-        key: function (req, file, cb) {
-            console.log(file);
-            cb(null, file.originalname);
-        }
-    })
-});
-
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(compression());
@@ -66,6 +37,7 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 app.use('/static', express.static(path.join(__dirname, 'public')))
 
+// Set authorization with jwt
 app.use(jwt({
     secret: jwt_secret,
     getToken: function fromHeaderOrCookie (req) { //fromHeaderOrQuerystring
@@ -78,13 +50,9 @@ app.use(jwt({
     }
   }).unless({path: ['/', '/register', '/api/signup', '/api/login']}));
 
+// Landing page route
 app.get('/', function (req, res) {
     res.render('landing');
-});
-
-// Upload route
-app.post('/upload', upload.single('upl'), function (req, res, next) {
-    res.send("Uploaded!");
 });
 
 // API Routes
