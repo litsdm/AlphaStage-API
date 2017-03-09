@@ -6,9 +6,14 @@ var jwt_secret = process.env.JWT_SECRET;
 exports.signUp = function(req, res) {
   var newUser = new User(req.body.user);
 
-  User.findOne({ email: newUser.email }, function(err, user) {
-    if (user) {
-      res.send({ message: "Email already in use." })
+  User.find({ $or:[ { email: newUser.email }, { username: newUser.username } ] }, 'username email', function(err, users) {
+    if (users.length > 0) {
+      if (users[0].email === newUser.email || users.length === 2) {
+        res.send({ message: "Email already in use." })
+      }
+      else {
+        res.send({ message: "Username is taken." })
+      }
     }
     else {
       newUser.save(function(err, user) {
