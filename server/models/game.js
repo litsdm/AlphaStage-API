@@ -22,10 +22,13 @@ var GameSchema = new Schema({
   winBuildURL: String,
   macFilename: String,
   winFilename: String,
-  winExe: String
+  winExe: String,
+  isPrivate: Boolean,
+  allowedPlayers: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 });
 
 GameSchema.pre('save', function(next){
+  console.log(this);
   // SET createdAt AND updatedAt
   var now = new Date();
   this.updatedAt = now;
