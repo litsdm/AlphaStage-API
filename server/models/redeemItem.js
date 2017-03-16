@@ -7,7 +7,6 @@ var RedeemItemSchema = new Schema({
   updatedAt: Date,
   item: Schema.ObjectId,
   key: String,
-  takenBy: { type: Schema.ObjectId, ref: 'User', default: null },
   type: String
 });
 

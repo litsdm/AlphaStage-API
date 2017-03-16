@@ -160,3 +160,15 @@ exports.deleteGame = function(req, res) {
     res.json({ message: 'Successfully deleted' });
   });
 }
+
+exports.updateAllowedUsers = function(req, res) {
+  Game.findByIdAndUpdate(req.body.gameId,
+    { $addToSet: { allowedPlayers: req.body.user } },
+    function(err, game) {
+      if (err) {
+        res.send(err);
+      }
+
+      res.json({ validKey: true });
+    })
+}

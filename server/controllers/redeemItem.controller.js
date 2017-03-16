@@ -17,12 +17,27 @@ exports.addRedeemItem = function (req, res, next, app) {
       }, function (err) {
         if (err) {
           // handle error
-          console.log(err);
           res.send('There was an error sending the email');
           return;
         }
       });
 
     res.json({ redeemItem: redeemItem });
+  });
+}
+
+exports.redeem = function (req, res, next) {
+  var user = req.body.user;
+  var key = req.body.key;
+
+  RedeemItem.findOneAndRemove({ key: key }, function(err, redeemItem) {
+    if (err) { res.status(500).send(err); }
+
+    if (!redeemItem) {
+      res.json({ validKey: false, message: "The key you entered does not exist." })
+    }
+    else {
+      next();
+    }
   });
 }
