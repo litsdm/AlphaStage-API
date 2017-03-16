@@ -7,6 +7,7 @@ var compression = require('compression');
 var mongoose = require('mongoose');
 var jwt = require('express-jwt');
 var path = require('path');
+var mailer = require('express-mailer');
 
 // Import routes
 var games = require('./server/routes/game.routes.js');
@@ -16,26 +17,43 @@ var auth = require('./server/routes/auth.routes.js');
 var potentialUser = require('./server/routes/potentialUser.routes.js');
 var directUpload = require('./server/routes/upload.routes.js');
 
+var RedeemItemController = require('./server/controllers/redeemItem.controller.js');
+
 // Declare env variables
 var port = process.env.PORT || 8080;
 var mongo_url = process.env.MONGO_URL;
 var s3_secret = process.env.AWS_SECRET_ACCESS_KEY;
 var s3_access = process.env.AWS_ACCESS_KEY_ID;
 var jwt_secret = process.env.JWT_SECRET;
+var mail_password = process.env.MAIL_PASSWORD;
 
 // Connect to mongoose
 mongoose.connect(mongo_url);
 mongoose.Promise = global.Promise
 
-// configure app to use bodyParser()
+// Configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(compression());
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 
+// Views setup
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 app.use('/static', express.static(path.join(__dirname, 'public')))
+
+// Mailer Setup
+mailer.extend(app, {
+  from: 'alphastagegames@gmail.com',
+  host: 'smtp.gmail.com', // hostname
+  secureConnection: true, // use SSL
+  port: 465, // port for secure SMTP
+  transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
+  auth: {
+    user: 'alphastagegames@gmail.com',
+    pass: mail_password
+  }
+});
 
 // Set authorization with jwt
 app.use(jwt({
@@ -48,7 +66,7 @@ app.use(jwt({
       }
       return null;
     }
-  }).unless({path: ['/', '/register', '/api/signup', '/api/login']}));
+  }).unless({path: ['/', '/register', '/api/signup', '/api/login', '/api/testinvite']}));
 
 // Landing page route
 app.get('/', function (req, res) {
@@ -61,6 +79,11 @@ app.use('/api', gameplays);
 app.use('/api', feedback);
 app.use('/api', auth);
 app.use('/api', directUpload);
+
+// Other routes
+app.post('/api/testinvite', function (req, res, next) {
+  RedeemItemController.addRedeemItem(req, res, next, app);
+});
 
 // Landing page signups route
 app.use(potentialUser);

@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var shortid = require('shortid');
 
 var Schema = mongoose.Schema;
 
@@ -8,7 +7,7 @@ var RedeemItemSchema = new Schema({
   updatedAt: Date,
   item: Schema.ObjectId,
   key: String,
-  takenBy: { type: Schema.ObjectId, ref: 'User' },
+  takenBy: { type: Schema.ObjectId, ref: 'User', default: null },
   type: String
 });
 
@@ -19,8 +18,6 @@ RedeemItemSchema.pre('save', function(next){
   if ( !this.createdAt ) {
     this.createdAt = now;
   }
-
-  this.key = shortid.generate()
 
   next();
 });

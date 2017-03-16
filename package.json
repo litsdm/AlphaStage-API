@@ -16,6 +16,7 @@
     "express": "^4.14.0",
     "express-handlebars": "^3.0.0",
     "express-jwt": "^5.1.0",
+    "express-mailer": "^0.3.1",
     "jsonwebtoken": "^7.2.1",
     "mongoose": "^4.7.1",
     "sanitize-html": "^1.13.0",
