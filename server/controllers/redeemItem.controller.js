@@ -20,9 +20,9 @@ exports.addRedeemItem = function (req, res, next, app) {
           res.send('There was an error sending the email');
           return;
         }
-      });
 
-    res.json({ redeemItem: redeemItem });
+        res.json({ redeemItem: redeemItem });
+      });
   });
 }
 
@@ -37,6 +37,8 @@ exports.redeem = function (req, res, next) {
       res.json({ validKey: false, message: "The key you entered does not exist." })
     }
     else {
+      req.item = redeemItem.item;
+      req.itemType = redeemItem.type;
       next();
     }
   });

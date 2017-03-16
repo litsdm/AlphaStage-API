@@ -162,13 +162,13 @@ exports.deleteGame = function(req, res) {
 }
 
 exports.updateAllowedUsers = function(req, res) {
-  Game.findByIdAndUpdate(req.body.gameId,
+  Game.findByIdAndUpdate(req.item,
     { $addToSet: { allowedPlayers: req.body.user } },
     function(err, game) {
       if (err) {
         res.send(err);
       }
 
-      res.json({ validKey: true });
+      res.json({ validKey: true, itemType: req.itemType, game: game, user: req.body.user });
     })
 }
