@@ -66,7 +66,7 @@ app.use(jwt({
       }
       return null;
     }
-  }).unless({path: ['/', '/register', '/api/signup', '/api/login', '/api/testinvite']}));
+  }).unless({path: ['/', '/register', '/api/signup', '/api/login']}));
 
 // Landing page route
 app.get('/', function (req, res) {
@@ -81,7 +81,7 @@ app.use('/api', auth);
 app.use('/api', directUpload);
 
 // Other routes
-app.post('/api/testinvite', function (req, res, next) {
+app.post('/api/privateinvite', function (req, res, next) {
   RedeemItemController.addRedeemItem(req, res, next, app);
 });
 

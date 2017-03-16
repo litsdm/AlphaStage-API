@@ -9,8 +9,8 @@ exports.addRedeemItem = function (req, res, next, app) {
   newRedeemItem.save(function(err, redeemItem) {
     if (err) { res.status(500).send(err); }
 
-    app.mailer.send('testInvite', {
-        to: 'cdiezmoran@gmail.com',
+    app.mailer.send('privateInvite', {
+        to: req.body.email,
         subject: 'You have been invited to play ' + req.body.game + '!',
         game: req.body.game,
         key: redeemItem.key
