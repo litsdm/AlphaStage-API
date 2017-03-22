@@ -97,4 +97,22 @@ $(function () {
     e.preventDefault();
     $('#video-modal').modal();
   })
+
+  var phrases = ["Get feedback", "Grow your community", "Build better games"];
+  var index = 1;
+
+  setTimeout(animateText, 1500);
+
+  function animateText() {
+    $('#text-change').fadeOut(300, function() {
+        $(this).text(phrases[index]).fadeIn(500);
+
+        index += 1;
+        if (index > 2) {
+          index = 0;
+        }
+
+        setTimeout(animateText, 1500);
+    });
+  }
 })
