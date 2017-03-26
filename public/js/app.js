@@ -1,15 +1,37 @@
 $(function () {
+    $(document).scroll(function() {
+    var y = $(this).scrollTop();
+    if (y > 50) {
+      $('.screen-main').fadeIn(500);
+      $('.navbar-top').addClass('detach');
+    }
+    else {
+      $('.screen-main').fadeOut(500);
+      $('.navbar-top').removeClass('detach');
+    }
+  });
+
   function updateSignUpButton() {
     $btn = $('.btn-signup')
 
     if ($btn.hasClass('green')) {
       $btn.removeClass('green');
-      $btn.text('Sign up to launch awesome games')
-      return
+    }
+    else {
+      $btn.addClass('green');
     }
 
-    $btn.addClass('green');
-    $btn.text('Sign up to play awesome games')
+    $('.txt-change').fadeOut(200, function() {
+      if ($btn.hasClass('green')) {
+        $('.txt-change').text('launch awesome games!')
+        $('.txt-change').fadeIn(200);
+        return
+      }
+
+      $('.txt-change').text('play awesome games!')
+      $('.txt-change').fadeIn(200);
+    });
+
   }
 
   $('.btn-signup').click(function(e) {
@@ -98,21 +120,9 @@ $(function () {
     $('#video-modal').modal();
   })
 
-  var phrases = ["Get feedback", "Grow your community", "Build better games"];
-  var index = 1;
-
-  setTimeout(animateText, 1500);
-
-  function animateText() {
-    $('#text-change').fadeOut(300, function() {
-        $(this).text(phrases[index]).fadeIn(500);
-
-        index += 1;
-        if (index > 2) {
-          index = 0;
-        }
-
-        setTimeout(animateText, 1500);
-    });
-  }
+  Typed.new("#text-change", {
+		strings: ["Get feedback", "Grow your community", "Build better games"],
+		typeSpeed: 25,
+    loop: true
+	});
 })

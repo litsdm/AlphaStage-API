@@ -16,6 +16,7 @@ body {
   font-size: 48pt;
   color: white;
   margin-bottom: 30px;
+  margin-top: 60px;
 }
 
 #backshape .wrapper {
@@ -73,9 +74,9 @@ text-align: center;
   background-color: #0091EA;
   font-size: 14pt;
   border-radius: 24px;
-  padding: 5px 20px;
+  padding: 7.5px 40px;
   transition: all .2s ease-out;
-  margin-top: 25px;
+  font-weight: bold;
 }
 
 .btn-signup.green {
@@ -84,27 +85,44 @@ text-align: center;
 
 .btn-signup.green:hover {
   color: white;
-  padding: 5px 30px;
+  padding: 7.5px 50px;
   background-color: #00E676;
 }
 
 .btn-signup:hover {
   color: white;
-  padding: 5px 30px;
+  padding: 7.5px 50px;
   background-color: #00B0FF;
 }
 
-.navbar-blue {
-  background-color: rgba(50,66,93, 0.8);
+.navbar-top {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid white;
+  transition: all 0.2s ease-in;
 }
 
-.nav li a, .navbar-brand {
-  color: #ccc;
+.navbar-top.detach {
+  background-color: rgb(255, 255, 255);
+  border-bottom: 1px solid #ccc;
+}
+
+.navbar-top .navbar-brand {
+  color: white;
   transition: color 0.2s ease-in;
 }
 
-.nav li a:hover, .navbar-brand:hover {
+.navbar-top .navbar-brand:hover {
   color: #fff;
+  background-color: transparent;
+}
+
+.navbar-top.detach .navbar-brand {
+  color: #555;
+  transition: color 0.2s ease-in;
+}
+
+.navbar-top.detach .navbar-brand:hover {
+  color: #222;
   background-color: transparent;
 }
 
@@ -112,6 +130,7 @@ text-align: center;
   color: #0C0D28;
   width: 100%;
   font-size: 18px;
+  display: block;
 }
 
 .email-input {
@@ -120,7 +139,6 @@ text-align: center;
   border: none;
   border-top-left-radius: 24px;
   border-bottom-left-radius: 24px;
-  margin-top: 40px;
 }
 
 .dev-select {
@@ -179,5 +197,73 @@ text-align: center;
 
 .screen-main {
   width: 80%;
-  margin-top: -250px;
+  margin-top: -100px;
+  display: none;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+#text-change {
+  display: inline;
+}
+
+.navbar-brand img {
+  width: 29px;
+  height: 24px;
+  display: inline-block;
+}
+
+#title img {
+  width: 174px;
+  height: 145px;
+  margin-top: 60px;
+  margin-bottom: 25px;
+}
+
+.navbar .navbar-nav li a {
+  color: #eee;
+  background-color: transparent;
+}
+
+.navbar .navbar-nav li a:hover, .navbar .navbar-nav li a:focus {
+  color: #fff;
+  background-color: transparent;
+}
+
+.navbar.detach .navbar-nav li a {
+  color: #555;
+}
+
+.navbar.detach .navbar-nav li a:hover, .navbar.detach .navbar-nav li a:focus {
+  color: #222;
+}
+
+.su-phrase {
+  margin-bottom: 15px;
+  margin-top: 40px;
+  margin-top: 10px;
+  font-size: 16pt;
+  width: 40%;
+  display: inline-block;
+}
+
+.typed-cursor{
+	opacity: 1;
+	-webkit-animation: blink 0.7s infinite;
+	-moz-animation: blink 0.7s infinite;
+	animation: blink 0.7s infinite;
+}
+@keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+@-moz-keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
 }
