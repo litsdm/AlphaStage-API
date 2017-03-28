@@ -25,6 +25,7 @@ body {
   margin:50px auto 200px;
   width:100%;
   padding:0 5%;
+  color: black;
   transform:skew(0deg,-5deg);
 -ms-transform:skew(0deg,-10deg);
 -webkit-transform:skew(0deg,-5deg);
@@ -244,6 +245,37 @@ text-align: center;
   font-size: 16pt;
   width: 40%;
   display: inline-block;
+}
+
+.center-info {
+  text-align: justify;
+  margin: auto;
+  text-align-last: center;
+  width: 50%;
+  color: #555;
+  font-size: 14pt;
+}
+
+.modal-content {
+  background-color: #222;
+}
+
+.modal-header {
+  border-bottom: 1px solid #444;
+}
+
+.modal-body {
+  background-color: #333;
+  padding: 0
+}
+
+.modal-footer {
+  border-top: 1px solid #555;
+}
+
+.modal-dialog {
+  width: 720px;
+  max-width: 720px;
 }
 
 .typed-cursor{

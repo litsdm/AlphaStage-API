@@ -4,17 +4,18 @@
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+          <i class="fa fa-bars"></i>
         </button>
         <a class="navbar-brand" href="#">
           <img alt="Brand" src="../static/images/alphaicon.png">  Alpha Stage
         </a>
       </div>
-      <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
-        <li><a href="#">Contact Us</a></li>
-      </ul>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#" class="btn btn-download"><i class="fa fa-download"></i> Download</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
@@ -39,11 +40,35 @@
   <div class="wrapper">
     <img class="screen-main unbend" src="../static/images/screen1.png" alt="Screenshot of alpha stage home page">
     <br>
+    <h2 style="margin-top: 60px;">Get Feedback</h2>
+    <p class="center-info">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non rhoncus orci. Duis nec sapien ante. Pellentesque auctor vel felis id congue. Phasellus in ante nisl. Proin molestie consectetur dui, nec lobortis tortor cursus in. Etiam arcu nunc, imperdiet non ullamcorper sed, posuere vitae nibh. Sed convallis sit amet metus ultrices sodales.
+    </p>
   </div>
 </div>
 <div class="footer">
   <div class="wrapper"></div>
 </div>
+
+<div class="modal fade" id="downloadModal" role="dialog">
+  <div class="modal-dialog pim">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Enter your invitation key</h3>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <label class="input-tag">KEY</label>
+          <input class="gf-input" type="text" ref="emailRef" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn play-btn">Send invite</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal fade" id="video-modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
