@@ -256,6 +256,12 @@ text-align: center;
   font-size: 14pt;
 }
 
+.side-info {
+  text-align: justify;
+  font-size: 14pt;
+  color: #555;
+}
+
 .modal-content {
   background-color: #222;
 }
@@ -276,6 +282,10 @@ text-align: center;
 .modal-dialog {
   width: 720px;
   max-width: 720px;
+}
+
+.info-row {
+  margin-top: 40vh;
 }
 
 .typed-cursor{

@@ -1,4 +1,5 @@
 // call the packages we need
+require('dotenv').config()
 var express = require('express');        // call express
 var app = express();                     // define our app using express
 var exphbs  = require('express-handlebars');
