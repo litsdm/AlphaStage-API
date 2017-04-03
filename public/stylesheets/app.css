@@ -278,6 +278,7 @@ text-align: center;
 
 .modal-footer {
   border-top: 1px solid #ddd;
+  text-align: center;
 }
 
 .modal-dialog {
@@ -302,6 +303,7 @@ text-align: center;
   border: none;
   padding: 5px;
   margin-bottom: 15px;
+  max-width: 100%;
 }
 
 .play-btn {

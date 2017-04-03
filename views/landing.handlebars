@@ -12,7 +12,7 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
-          <li><a href="#">Contact Us</a></li>
+          <li><a href="#" class="btn-contact">Contact Us</a></li>
           <li><a href="#" class="btn btn-download"><i class="fa fa-download"></i> Download</a></li>
         </ul>
       </div>
@@ -27,7 +27,7 @@
   </h2><!--
     <a href="#" class="videoplay-btn"><i class="fa fa-play-circle-o" aria-hidden="true"></i></a>
   --><br>
-  <p class="su-phrase">Sign up to be one of the first to try Alpha Stage and <span style="font-style: italic;" class="txt-change">launch awesome games!</span></p>
+  <p class="su-phrase">Be one of the first to try Alpha Stage and <span style="font-style: italic;" class="txt-change">launch awesome games!</span></p>
   <span class="fill-out">
     <input class="email-input" type="email" name="email" placeholder="Email">
     <a href="#" class="dev-select active">Developer</a>
@@ -85,11 +85,40 @@
       <div class="modal-body">
         <div class="container" style="width: 100%">
           <label class="input-tag">KEY</label>
-          <input class="gf-input" type="text" ref="emailRef" />
+          <input id="key-input" class="gf-input" type="text" />
         </div>
       </div>
       <div class="modal-footer">
         <a href="#" class="btn play-btn">Download</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="contactModal" role="dialog">
+  <div class="modal-dialog pim">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Contact Us</h3>
+      </div>
+      <div class="modal-body">
+        <div class="container" style="width: 100%">
+          <label class="input-tag">NAME</label>
+          <input name="name" class="gf-input" type="text" />
+          <label class="input-tag">YOUR EMAIL</label>
+          <input name="contactEmail" class="gf-input" type="text" />
+          <label class="input-tag">SUBJECT</label>
+          <input name="subject" class="gf-input" type="text" />
+          <label class="input-tag">MESSAGE</label>
+          <textarea name="message" class="gf-input" type="text"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a id="send-message" href="#" class="btn play-btn">Send</a>
+        <div style="margin-top: 10px">
+          <span>alphastagegames@gmail.com</span> -
+          <span><a href="https://github.com/cdiezmoran/AlphaStage-desktop" style="color: black"><i class="fa fa-github fa-2x"></i></a></span>
+        </div>
       </div>
     </div>
   </div>

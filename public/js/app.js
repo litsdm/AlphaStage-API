@@ -23,12 +23,12 @@ $(function () {
 
     $('.txt-change').fadeOut(200, function() {
       if ($btn.hasClass('green')) {
-        $('.txt-change').text('launch awesome games!')
+        $('.txt-change').text('play awesome games!')
         $('.txt-change').fadeIn(200);
         return
       }
 
-      $('.txt-change').text('play awesome games!')
+      $('.txt-change').text('launch awesome games!')
       $('.txt-change').fadeIn(200);
     });
 
@@ -58,6 +58,33 @@ $(function () {
       contentType: 'application/json',
       success: function(data) {
         swal("Thank you for subscribing!", "Your mail has been added to our list!", "success");
+      },
+      error: function(err) {
+        swal("There was an error!", err, "error");
+      }
+    });
+  });
+
+  $('#send-message').click(function(e) {
+    var name = $('[name=name]').val().trim();
+    var subject = $('[name=subject]').val().trim();
+    var message = $('[name=message]').val().trim();
+    var email = $('[name=contactEmail]').val().trim();
+
+    var data = {
+      name: name,
+      subject: subject,
+      email: email,
+      message: message
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: '/contact-us',
+      data: JSON.stringify(data),
+      contentType: 'application/json',
+      success: function(data) {
+        swal("Your message was sent!", "We'll get back to you as soon as possible.", "success");
       },
       error: function(err) {
         swal("There was an error!", err, "error");
@@ -130,5 +157,11 @@ $(function () {
     e.preventDefault();
 
     $('#downloadModal').modal();
+  })
+
+  $('.btn-contact').click(function(e) {
+    e.preventDefault();
+
+    $('#contactModal').modal();
   })
 })

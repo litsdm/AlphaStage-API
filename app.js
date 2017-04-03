@@ -66,7 +66,7 @@ app.use(jwt({
       }
       return null;
     }
-  }).unless({path: ['/', '/register', '/api/signup', '/api/login']}));
+  }).unless({path: ['/', '/register', '/api/signup', '/api/login', '/contact-us']}));
 
 // Landing page route
 app.get('/', function (req, res) {
@@ -85,6 +85,24 @@ app.use('/api', redeemItem);
 app.post('/api/privateinvite', function (req, res, next) {
   RedeemItemController.addRedeemItem(req, res, next, app);
 });
+
+app.post('/contact-us', function(req, res, next) {
+  app.mailer.send('contactEmail', {
+    to: 'alphastagegames@gmail.com',
+    subject: req.body.subject,
+    name: req.body.name,
+    message: req.body.message,
+    email: req.body.email
+  }, function (err) {
+    if (err) {
+      // handle error
+      res.send('There was an error sending the email');
+      return;
+    }
+
+    res.send('Success contacted devs');
+  });
+})
 
 // Landing page signups route
 app.use(potentialUser);
