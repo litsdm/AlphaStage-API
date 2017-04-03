@@ -263,29 +263,64 @@ text-align: center;
 }
 
 .modal-content {
-  background-color: #222;
+  background-color: #fff;
+  color: #222;
 }
 
 .modal-header {
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid #ddd;
 }
 
 .modal-body {
-  background-color: #333;
+  background-color: #eee;
   padding: 0
 }
 
 .modal-footer {
-  border-top: 1px solid #555;
+  border-top: 1px solid #ddd;
 }
 
 .modal-dialog {
-  width: 720px;
-  max-width: 720px;
+  width: 450px;
+  max-width: 450px;
 }
 
 .info-row {
   margin-top: 40vh;
+}
+
+.input-tag {
+  color: #444;
+  font-weight: bold;
+  font-size: 1.4rem;
+  margin-top: 15px;
+}
+
+.gf-input {
+  color: black;
+  width: 100%;
+  border: none;
+  padding: 5px;
+  margin-bottom: 15px;
+}
+
+.play-btn {
+  background-color: #2196F3;
+  color: white;
+  border-radius: 24px;
+  padding: 5px 20px;
+  transition: all .1s ease-out;
+  margin-right: 15px;
+}
+
+.play-btn:hover {
+  color: white;
+  padding: 5px 30px;
+  background-color: #42A5F5;
+}
+
+.play-btn:focus {
+  color: white;
 }
 
 .typed-cursor{

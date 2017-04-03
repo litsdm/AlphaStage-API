@@ -125,4 +125,10 @@ $(function () {
 		typeSpeed: 25,
     loop: true
 	});
+
+  $('.btn-download').click(function(e) {
+    e.preventDefault();
+
+    $('#downloadModal').modal();
+  })
 })
