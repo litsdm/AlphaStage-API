@@ -1,6 +1,6 @@
 var AnalyticsEvent = require('../models/analyticsEvent');
 
-exports.addGame = function(req, res, next) {
+exports.addEvent = function(req, res, next) {
   var newEvent = new AnalyticsEvent();
 
   newEvent.name = req.body.eventName;
