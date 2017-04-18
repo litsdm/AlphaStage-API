@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var jwt = require('express-jwt');
 var path = require('path');
 var mailer = require('express-mailer');
+var schedule = require('node-schedule');
 
 // Import routes
 var games = require('./server/routes/game.routes.js');
@@ -108,6 +109,22 @@ app.post('/contact-us', function(req, res, next) {
 
 // Landing page signups route
 app.use(potentialUser);
+
+// Jobs
+// Every monday at 00:00
+var weeklyAnalyticsJob = schedule.scheduleJob('0 0 0 * * 1', function(){
+  // Store and reset weekly analytics
+});
+
+// First day of every month at 00:00
+var monthlyAnalyticsJob = schedule.scheduleJob('0 0 0 1 * *', function(){
+  // Store and reset monthly analytics
+});
+
+app.listen(port);
+console.log('Magic happens on port ' + port);
+going to end today.');
+});
 
 app.listen(port);
 console.log('Magic happens on port ' + port);
