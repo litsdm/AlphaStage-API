@@ -19,7 +19,7 @@ var auth = require('./server/routes/auth.routes.js');
 var potentialUser = require('./server/routes/potentialUser.routes.js');
 var directUpload = require('./server/routes/upload.routes.js');
 var redeemItem = require('./server/routes/redeemItem.routes.js');
-var analyticsEvent = require('./server/routes/analyticsEvent.routes.js');
+var analytics = require('./server/routes/analytics.routes.js');
 
 var RedeemItemController = require('./server/controllers/redeemItem.controller.js');
 
@@ -82,7 +82,7 @@ app.use('/api', feedback);
 app.use('/api', auth);
 app.use('/api', directUpload);
 app.use('/api', redeemItem);
-app.use('/api', analyticsEvent);
+app.use('/api', analytics);
 
 // Other routes
 app.post('/api/privateinvite', function (req, res, next) {

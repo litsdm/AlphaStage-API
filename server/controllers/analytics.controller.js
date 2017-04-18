@@ -1,3 +1,4 @@
+var Analytics = require('../models/analytics');
 var AnalyticsEvent = require('../models/analyticsEvent');
 
 exports.addEvent = function(req, res, next) {
