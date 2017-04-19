@@ -10,7 +10,9 @@ exports.addGame = function(req, res, next) {
   newGame.img = sanitizeHtml(newGame.img);
   newGame.backgroundImg = sanitizeHtml(newGame.backgroundImg);
 
-  newGame.save((err, saved) => {
+  newGame.analytics = req.analytics;
+
+  newGame.save(function(err, saved) {
     if (err) { res.status(500).send(err); }
 
     res.json({ game: saved });

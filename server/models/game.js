@@ -24,11 +24,11 @@ var GameSchema = new Schema({
   winFilename: String,
   winExe: String,
   isPrivate: Boolean,
-  allowedPlayers: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+  allowedPlayers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  analytics: { type: Schema.Types.ObjectId, ref: 'Analytics' }
 });
 
 GameSchema.pre('save', function(next){
-  console.log(this);
   // SET createdAt AND updatedAt
   var now = new Date();
   this.updatedAt = now;

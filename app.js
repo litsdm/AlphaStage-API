@@ -123,8 +123,3 @@ var monthlyAnalyticsJob = schedule.scheduleJob('0 0 0 1 * *', function(){
 
 app.listen(port);
 console.log('Magic happens on port ' + port);
-going to end today.');
-});
-
-app.listen(port);
-console.log('Magic happens on port ' + port);
