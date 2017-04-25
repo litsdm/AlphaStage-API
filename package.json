@@ -19,6 +19,7 @@
     "express-jwt": "^5.1.0",
     "express-mailer": "^0.3.1",
     "jsonwebtoken": "^7.2.1",
+    "lodash": "^4.17.4",
     "mongoose": "^4.7.1",
     "node-schedule": "^1.2.1",
     "sanitize-html": "^1.13.0",

@@ -57,8 +57,8 @@ exports.getDeveloperGames = function(req, res) {
   .populate({
     path: 'games',
     model: 'Game',
-    select: 'name _id feedbacks backgroundImg',
-    populate: {
+    select: 'name _id feedbacks img analytics',
+    populate: [{
       path: 'feedbacks',
       model: 'Feedback',
       options: { sort: { 'createdAt': -1 } },
@@ -66,7 +66,11 @@ exports.getDeveloperGames = function(req, res) {
         path: 'gameplay sender',
         select: 'username _id cloudfrontURL'
       }
-    }
+    },
+    {
+      path: 'analytics',
+      model: 'Analytics'
+    }]
   })
   .exec(function(err, dev) {
     if (err) { res.status(500).send(err); }
