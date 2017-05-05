@@ -20,6 +20,11 @@ exports.triggerDefaultEvent = function(req, res, next) {
   Analytics.findById(analyticsID, function(err, analytics) {
     if (err) {
       res.send(err);
+      return
+    }
+    else if (!analytics) {
+      res.sendStatus(400);
+      return
     }
     if (name == "pageView") {
       analytics.pageViews += 1
